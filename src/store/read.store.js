@@ -6,7 +6,6 @@ export function cronometer(hour = 0, minutes = 0, seconds = 0) {
 	dateFinish.setHours(hour, minutes, seconds);
 	return readable(null, function start(set) {
 		let intervalCronometer = setInterval(() => {
-			console.log('entra');
 			let dateDiff = getDateDiff(new Date(), dateFinish);
 			let dateFormat = getDateFormat(
 				dateDiff.getDate(),

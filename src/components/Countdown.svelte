@@ -15,7 +15,7 @@
 </script>
 
 <h3 class="text-2xl">Nos vemos, no vayas a faltar 😃</h3>
-<section class="flex justify-center items-center text-center my-5">
+<section class="grid grid-cols-4 gap-3 md:flex md:justify-center md:items-center text-center my-5">
 	<TimeContainer time={days} nameTime={'Días'} />
 	<TimeContainer time={hour} nameTime={'Horas'} />
     <TimeContainer time={minutes} nameTime={'Minutos'} />

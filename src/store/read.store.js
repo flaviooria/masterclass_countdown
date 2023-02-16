@@ -1,14 +1,14 @@
 import { readable } from 'svelte/store';
 
 export function cronometer(hour = 0, minutes = 0, seconds = 0) {
-	let dateFinish = new Date();
-	dateFinish.setFullYear(2023, 1, 17);
+	let dateFinish = new Date('2023-02-17');
+	// dateFinish.setFullYear();
 	dateFinish.setHours(hour, minutes, seconds);
 	return readable(null, function start(set) {
 		let intervalCronometer = setInterval(() => {
 			let dateDiff = getDateDiff(new Date(), dateFinish);
 			let dateFormat = getDateFormat(
-				dateDiff.getDate(),
+				(dateDiff.getDate() === new Date().getDate() ? 0 : dateDiff.getDate()),
 				dateDiff.getHours(),
 				dateDiff.getMinutes(),
 				dateDiff.getSeconds()
@@ -27,13 +27,16 @@ function getDateDiff(startDate, endDate) {
 	const msInSecond = 1000; // 1s es igual 1000ms
 
 	let diffMs = endDate - startDate; // milliseconds between now & Christmas
-	let diffDays = Math.floor(diffMs / 86400000); // days
+	let diffDays = Math.floor(diffMs / 1000 / 60 / 60 / 24); // days
 	let diffHrs = Math.floor((diffMs % 86400000) / msInHour); // hours
 	let diffMins = Math.round(((diffMs % 86400000) % msInHour) / msInMinute); // minutes
 	let diffSec = Math.round(((diffMs % 86400000) % msInMinute) / msInSecond); // seconds
 
 	let date = new Date();
-	date.setDate(diffDays);
+	console.log('dias que faltan',diffDays);
+	if (diffDays != 0) {
+		date.setDate(parseInt(diffDays))
+	}
 	date.setHours(diffHrs);
 	date.setMinutes(diffMins);
 	date.setSeconds(diffSec);
